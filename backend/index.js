@@ -9,7 +9,6 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 
-
 app.get('/', (request, response )=>{
     console.log(request)
     return response.status(234).send("testing")
@@ -17,16 +16,22 @@ app.get('/', (request, response )=>{
 
 app.post('/register', async (request, response) => {
     try {
-        const { username, email, password } = request.body;
+        const { username, email, password, profile_picture, level, code_battles, type_battles_won, average_wpm, games } = request.body;
         if (!username){
             return response.status(400).send({
-                message: "Test"
+                message: response.message
             })
         }
         const newUser = {
-            username: request.body.username,
-            email: request.body.email,
-            password: request.body.password,
+            username,
+            email,
+            password,
+            profile_picture: "default_picture_url",
+            level: level || 1,
+            code_battles: code_battles || {},
+            type_battles_won: type_battles_won || 0,
+            average_wpm: average_wpm || 0,
+            games: games || [],
         }
 
         const user = await User.create(newUser);

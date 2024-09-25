@@ -7,10 +7,26 @@ function Signup() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const profile_picture = "test.jpeg";
+    const level = 1;
+    const code_battles = {};
+    const type_battles_won = 0;
+    const average_wpm = 0;
+    const games = [];
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        axios.post(`http://localhost:${PORT}/register`, {username, email, password})
+        axios.post(`http://localhost:${PORT}/register`, {
+            username,
+            email,
+            password, 
+            profile_picture,
+            level, 
+            code_battles,
+            type_battles_won,
+            average_wpm,
+            games,    
+        })
         .then(result => console.log(result))
         .catch(err => console.log(err ))
     }
